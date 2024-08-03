@@ -1,12 +1,12 @@
 #!/bin/bash
 set -euo pipefail
 USAGE=$(cat <<-END
-    Usage: ./install.sh [OPTION]
-    Install dotfile dependencies on mac or linux
+    Usage: ./install.sh [OPTIONS]
+    Install dependencies on mac or linux
 
     OPTIONS:
-        --tmux       install tmux
-        --zsh        install zsh 
+        --tmux              install tmux
+        --zsh               install zsh
 
     If OPTIONS are passed they will be installed
     with apt if on linux or brew if on OSX
@@ -58,7 +58,7 @@ fi
 ZSH=~/.oh-my-zsh
 ZSH_CUSTOM=$ZSH/custom
 if [ -d $ZSH ] && [ "$force" = "false" ]; then
-    echo "Skipping download of oh-my-zsh and related plugins, pass --force to force redeownload"
+    echo "Skipping download of oh-my-zsh and related plugins, pass --force to force re-download"
 else
     echo " --------- INSTALLING DEPENDENCIES ⏳ ----------- "
     rm -rf $ZSH
@@ -82,4 +82,3 @@ else
     echo " --------- INSTALLED SUCCESSFULLY ✅ ----------- "
     echo " --------- NOW RUN ./deploy.sh [OPTION] -------- "
 fi
-

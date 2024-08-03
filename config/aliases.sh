@@ -31,7 +31,7 @@ alias du='du -kh' # file space
 alias df='df -kTh' # disk space
 alias usage='du -sh * 2>/dev/null | sort -rh'
 alias dus='du -sckx * | sort -nr'
-#
+
 #-------------------------------------------------------------
 # cd
 #-------------------------------------------------------------
@@ -131,4 +131,3 @@ alias lt='ls -ltr'        # sort by date, most recent last
 alias lm='ls -al |more'   # pipe through 'more'
 alias lr='ls -lR'         # recursive ls
 alias tree='tree -Csu'    # nice alternative to 'recursive ls'
-

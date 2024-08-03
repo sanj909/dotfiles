@@ -1,13 +1,12 @@
 #!/bin/bash
 set -euo pipefail
 USAGE=$(cat <<-END
-    Usage: ./deploy.sh [OPTIONS], eg. ./deploy.sh --local --vim
-    Creates ~/.zshrc and ~/.tmux.conf with location
-    specific config
+    Usage: ./deploy.sh [OPTIONS]
+    Creates ~/.zshrc and ~/.tmux.conf with location specific config
 
     OPTIONS:
-        --local                 deploy local config only, only common aliases are sourced
-        --vim                   deploy very simple vimrc config 
+        --local     deploy local config only, only common aliases are sourced
+        --vim       deploy very simple vimrc config
 END
 )
 
@@ -30,7 +29,6 @@ while (( "$#" )); do
     esac
 done
 
-
 echo "deploying on $LOC machine..."
 
 # Tmux setup
@@ -44,8 +42,8 @@ fi
 
 # zshrc setup
 echo "source $DOT_DIR/config/zshrc.sh" > $HOME/.zshrc
-# conifg/aliases_speechmatics.sh adds remote specific aliases and cmds
+# conifg/aliases_remote.sh adds remote specific aliases and cmds
 [ $LOC = 'remote' ] &&  echo \
-    "source $DOT_DIR/config/aliases_speechmatics.sh" >> $HOME/.zshrc
+    "source $DOT_DIR/config/aliases_remote.sh" >> $HOME/.zshrc
 
 zsh

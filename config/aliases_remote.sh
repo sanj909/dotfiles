@@ -248,4 +248,3 @@ clean_vm () {
   ps -ef | grep zsh | awk '{print $2}' | xargs sudo kill
   ps -ef | grep vscode | awk '{print $2}' | xargs sudo kill
 }
-
