@@ -31,17 +31,20 @@ done
 
 echo "deploying on $LOC machine..."
 
-# Tmux setup
+# Tmux setup. Overwrites $HOME/.tmux.conf
 echo "source $DOT_DIR/config/tmux.conf" > $HOME/.tmux.conf
 
-# Vimrc
+# vimrc. Overwrites $HOME/.vimrc
 if [[ $VIM == "true" ]]; then
     echo "deploying .vimrc"
     echo "source $DOT_DIR/config/vimrc" > $HOME/.vimrc
 fi
 
 # zshrc setup
-echo "source $DOT_DIR/config/zshrc.sh" > $HOME/.zshrc
+# ./install.sh copies $HOME/.zshrc to $HOME/.zshrc.pre-oh-my-zsh and overwrites $HOME/.zshrc
+# Revert this change and add "source $DOT_DIR/config/zshrc.sh" to $HOME/.zshrc
+cat $HOME/.zshrc.pre-oh-my-zsh > $HOME/.zshrc
+printf "\nsource $DOT_DIR/config/zshrc.sh\n" >> $HOME/.zshrc
 # conifg/aliases_remote.sh adds remote specific aliases and cmds
 [ $LOC = 'remote' ] &&  echo \
     "source $DOT_DIR/config/aliases_remote.sh" >> $HOME/.zshrc

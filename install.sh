@@ -62,6 +62,7 @@ if [ -d $ZSH ] && [ "$force" = "false" ]; then
 else
     echo " --------- INSTALLING DEPENDENCIES ⏳ ----------- "
     rm -rf $ZSH
+    # The command below copies $HOME/.zshrc to $HOME/.zshrc.pre-oh-my-zsh and overwrites $HOME/.zshrc
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
     git clone https://github.com/romkatv/powerlevel10k.git \

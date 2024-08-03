@@ -55,3 +55,9 @@ Included in this repo are the onedark and onedarker color schemes for iterm
 Linked below are some other people's dotfiles
 * [Ed's](https://github.com/erees1/dotfiles) - (Very) extensive nvim config, custom tmux theme, vim keybindings in terminal, gitconfig, install scripts for nvim (nightly) and delta (nicer looking git diff)
 * [John's](https://github.com/McHughes288/dotfiles) - Very similar to sm-dotfiles but has some useful vscode extensions if you'd like some recommendations
+
+## Uninstallation
+Uninstall oh-my-zsh. This restores .zshrc, but not .tmux.conf or .vimrc
+```bash
+uninstall_oh_my_zsh
+```
