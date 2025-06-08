@@ -91,11 +91,19 @@ alias gstp="git stash pop"
 alias gsta="git stash apply"
 alias gstd="git stash drop"
 alias gstc="git stash clear"
+alias gstl="git stash list"
 
 alias ggsup='git branch --set-upstream-to=origin/$(git_current_branch)'
 alias gpsup='git push --set-upstream origin $(git_current_branch)'
 
 alias gb="git branch"
+
+#-------------------------------------------------------------
+# conda
+#-------------------------------------------------------------
+
+alias ca="conda activate"
+alias cas="conda activate seqaxmain"
 
 #-------------------------------------------------------------
 # tmux
@@ -124,4 +132,10 @@ alias lu='ls -ltur'       # sort by and show access time, most recent last
 alias lt='ls -ltr'        # sort by date, most recent last
 alias lm='ls -al |more'   # pipe through 'more'
 alias lr='ls -lR'         # recursive ls
-alias tree='tree -Csu'    # nice alternative to 'recursive ls'
+# alias tree='tree -Csu'    # nice alternative to 'recursive ls'
+
+#-------------------------------------------------------------
+# gcloud
+#-------------------------------------------------------------
+
+alias gls="gsutil ls"
