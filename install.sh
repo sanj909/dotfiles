@@ -7,6 +7,7 @@ USAGE=$(cat <<-END
     OPTIONS:
         --tmux              install tmux
         --zsh               install zsh
+        --micro             install micro
 
     If OPTIONS are passed they will be installed
     with apt if on linux or brew if on OSX
@@ -15,6 +16,7 @@ END
 
 zsh=false
 tmux=false
+micro=false
 force=false
 while (( "$#" )); do
     case "$1" in
@@ -24,6 +26,8 @@ while (( "$#" )); do
             zsh=true && shift ;;
         --tmux)
             tmux=true && shift ;;
+        --micro)
+            micro=true && shift ;;
         --force)
             force=true && shift ;;
         --) # end argument parsing
@@ -45,6 +49,7 @@ if [ $machine == "Linux" ]; then
     DOT_DIR=$(dirname $(realpath $0))
     [ $zsh == true ] && sudo apt-get install zsh
     [ $tmux == true ] && sudo apt-get install tmux
+    [ $micro == true ] && sudo apt-get install micro
 
 # Installing on mac with homebrew
 elif [ $machine == "Mac" ]; then
@@ -52,6 +57,7 @@ elif [ $machine == "Mac" ]; then
     DOT_DIR=$(dirname $(realpath $0))
     [ $zsh == true ] && brew install zsh
     [ $tmux == true ] && brew install tmux
+    [ $micro == true ] && brew install micro
 fi
 
 # Setting up oh my zsh and oh my zsh plugins
