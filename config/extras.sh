@@ -2,6 +2,16 @@
 # zsh extra settings
 #-------------------------------------------------------------
 
+export PATH="$HOME/.local/bin:$PATH"
+
+export NVM_DIR="$HOME/.nvm"
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+  . "$NVM_DIR/nvm.sh"
+fi
+if [ -s "$NVM_DIR/bash_completion" ]; then
+  . "$NVM_DIR/bash_completion"
+fi
+
 setopt RM_STAR_WAIT              # Wait when typing `rm *` before being able to confirm
 setopt NO_BEEP                   # Don't beep on errors in ZLE
 setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
@@ -64,3 +74,12 @@ function git_prepare() {
 zle -N git_prepare
 bindkey -r "^G"
 bindkey "^G" git_prepare
+
+# Use beam (thin) cursor in all terminals
+autoload -Uz add-zsh-hook
+set_beam_cursor() {
+  printf '\033[6 q'
+}
+set_beam_cursor
+add-zsh-hook preexec set_beam_cursor
+add-zsh-hook precmd set_beam_cursor

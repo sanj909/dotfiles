@@ -12,6 +12,8 @@ alias jp="jupyter lab"
 # -------------------------------------------------------------------
 
 alias cl="clear"
+alias claude="claude --effort max"
+alias qtop="MLQ_USER=sanj qtop"
 
 # file and directories
 alias rmd='rm -rf'
@@ -65,7 +67,7 @@ alias 9='cd -9'
 alias ga="git add"
 alias gaa="git add ."
 alias gk="git commit -m"
-alias gp="git push"
+alias gp="git pull && git pull --tags"
 
 alias gl="git log --oneline --decorate-refs-exclude=refs/tags -n10"
 alias glf="git log --decorate-refs-exclude=refs/tags"
@@ -139,3 +141,4 @@ alias lr='ls -lR'         # recursive ls
 #-------------------------------------------------------------
 
 alias gls="gsutil ls"
+alias glogin="gcloud auth login && gcloud auth application-default login"

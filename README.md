@@ -23,9 +23,7 @@ Installation on a mac requires homebrew so install this [from here](https://brew
 ### Step 3
 Deploy (e.g. source aliases for .zshrc, apply oh-my-zsh settings, etc.)
 ```bash
-# Local mac machine
-./deploy.sh --local
-# Remote linux machine
+# Deploy dotfiles
 ./deploy.sh
 # Include simple vimrc
 ./deploy.sh --vim

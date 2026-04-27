@@ -5,6 +5,7 @@
     "workbench.iconTheme": "Monokai Pro (Filter Spectrum) Icons",
     "terminal.integrated.defaultProfile.osx": "zsh",
     "terminal.integrated.fontFamily": "MesloLGS NF",
+    "terminal.integrated.cursorStyle": "line",
     "workbench.panel.defaultLocation": "right",
     "gitlens.views.scm.grouped.views": {
         "commits": false,
