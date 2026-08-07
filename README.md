@@ -31,6 +31,8 @@ Deploy (e.g. source aliases for .zshrc, apply oh-my-zsh settings, etc.)
 ./deploy.sh --vscode
 ```
 
+Existing VS Code settings are backed up to `~/Library/Application Support/Code/User/settings_pre_dotfiles.json` before the dotfiles settings are linked.
+
 ### Step 4
 This set of dotfiles uses the powerlevel10k theme for zsh. This makes your terminal look better and adds lots of useful features like env indicators, git status, etc.
 

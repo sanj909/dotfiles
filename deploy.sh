@@ -38,6 +38,13 @@ if [[ $VIM == "true" ]]; then
     echo "source $DOT_DIR/config/vimrc" > $HOME/.vimrc
 fi
 
+# zshrc setup
+# ./install.sh copies $HOME/.zshrc to $HOME/.zshrc.pre-oh-my-zsh and overwrites $HOME/.zshrc
+# Revert this change and add "source $DOT_DIR/config/zshrc.sh" to $HOME/.zshrc
+echo 'autoload -U compinit && compinit -u' > $HOME/.zshrc  # https://console.workbrew.com/documentation/troubleshooting#how-do-i-fix-my-code-zsh-code-completions
+cat $HOME/.zshrc.pre-oh-my-zsh >> $HOME/.zshrc
+printf "\nsource $DOT_DIR/config/zshrc.sh\n" >> $HOME/.zshrc
+
 # VS Code user settings and extensions
 if [[ $VSCODE == "true" ]]; then
     echo "deploying VS Code settings and extensions"
@@ -46,17 +53,25 @@ if [[ $VSCODE == "true" ]]; then
 
     vscode_user_dir="$HOME/Library/Application Support/Code/User"
     mkdir -p "$vscode_user_dir"
-    ln -sf "$DOT_DIR/vscode/settings.json" "$vscode_user_dir/settings.json"
+    vscode_settings_path="$vscode_user_dir/settings.json"
+    vscode_settings_backup_path="$vscode_user_dir/settings_pre_dotfiles.json"
+    if [[ -L "$vscode_settings_path" ]]; then
+        :
+    elif [[ -f "$vscode_settings_path" ]]; then
+        if [[ -e "$vscode_settings_backup_path" || -L "$vscode_settings_backup_path" ]]; then
+            echo "Cannot back up VS Code settings: $vscode_settings_backup_path already exists" >&2
+            exit 1
+        fi
+        echo "backing up VS Code settings to $vscode_settings_backup_path"
+        mv "$vscode_settings_path" "$vscode_settings_backup_path"
+    elif [[ -e "$vscode_settings_path" ]]; then
+        echo "Cannot replace VS Code settings: $vscode_settings_path is not a file or symlink" >&2
+        exit 1
+    fi
+    ln -sfn "$DOT_DIR/vscode/settings.json" "$vscode_settings_path"
 
     jq -r '.recommendations[]' "$DOT_DIR/vscode/extensions.json" \
         | xargs -n 1 code --install-extension
 fi
-
-# zshrc setup
-# ./install.sh copies $HOME/.zshrc to $HOME/.zshrc.pre-oh-my-zsh and overwrites $HOME/.zshrc
-# Revert this change and add "source $DOT_DIR/config/zshrc.sh" to $HOME/.zshrc
-echo 'autoload -U compinit && compinit -u' > $HOME/.zshrc  # https://console.workbrew.com/documentation/troubleshooting#how-do-i-fix-my-code-zsh-code-completions
-cat $HOME/.zshrc.pre-oh-my-zsh >> $HOME/.zshrc
-printf "\nsource $DOT_DIR/config/zshrc.sh\n" >> $HOME/.zshrc
 
 zsh
