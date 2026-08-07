@@ -12,7 +12,6 @@ alias jp="jupyter lab"
 # -------------------------------------------------------------------
 
 alias cl="clear"
-alias claude="claude --effort max"
 alias qtop="MLQ_USER=sanj qtop"
 
 # file and directories

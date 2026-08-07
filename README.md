@@ -27,6 +27,8 @@ Deploy (e.g. source aliases for .zshrc, apply oh-my-zsh settings, etc.)
 ./deploy.sh
 # Include simple vimrc
 ./deploy.sh --vim
+# Include VS Code settings and extensions
+./deploy.sh --vscode
 ```
 
 ### Step 4

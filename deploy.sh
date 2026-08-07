@@ -6,18 +6,22 @@ USAGE=$(cat <<-END
 
     OPTIONS:
         --vim       deploy very simple vimrc config
+        --vscode    deploy VS Code settings and extensions
 END
 )
 
 export DOT_DIR=$(dirname $(realpath $0))
 
 VIM="false"
+VSCODE="false"
 while (( "$#" )); do
     case "$1" in
         -h|--help)
             echo "$USAGE" && exit 1 ;;
         --vim)
             VIM="true" && shift ;;
+        --vscode)
+            VSCODE="true" && shift ;;
         --) # end argument parsing
             shift && break ;;
         -*|--*=) # unsupported flags
@@ -32,6 +36,20 @@ echo "source $DOT_DIR/config/tmux.conf" > $HOME/.tmux.conf
 if [[ $VIM == "true" ]]; then
     echo "deploying .vimrc"
     echo "source $DOT_DIR/config/vimrc" > $HOME/.vimrc
+fi
+
+# VS Code user settings and extensions
+if [[ $VSCODE == "true" ]]; then
+    echo "deploying VS Code settings and extensions"
+    command -v jq >/dev/null || { echo "jq is required to install VS Code extensions" >&2; exit 1; }
+    command -v code >/dev/null || { echo "VS Code's code command is required to install extensions" >&2; exit 1; }
+
+    vscode_user_dir="$HOME/Library/Application Support/Code/User"
+    mkdir -p "$vscode_user_dir"
+    ln -sf "$DOT_DIR/vscode/settings.json" "$vscode_user_dir/settings.json"
+
+    jq -r '.recommendations[]' "$DOT_DIR/vscode/extensions.json" \
+        | xargs -n 1 code --install-extension
 fi
 
 # zshrc setup
